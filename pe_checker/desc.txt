@@ -1,2 +1,2 @@
 - A static analysis tool.
-Pe_checker is a simple command line tool designed to read pe headers and check for their sections.
+Pe_checker is a simple command line tool designed to validate PE files and read their headers.

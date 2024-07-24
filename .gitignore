@@ -1,2 +1,3 @@
 .vscode
 example_exe/parrot.exe
+pe_checker/build/Debug

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "pe_structures.h"
+#include "printers.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,14 +12,20 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-#pragma region "MZ magic number check"
+#pragma region "Vars"
 
     FILE *fichier = fopen(argv[1], "rb");
+    MY_IMAGE_DOS_HEADER dos_header;
+
+#pragma endregion
+
     if (fichier == NULL)
     {
         printf("Erreur d'ouverture du fichier\n");
         return 1;
     }
+
+#pragma region "Magic number check"
 
     unsigned short magic_number;
     fread(&magic_number, sizeof(unsigned short), 1, fichier); // buffer de destination, taille du buffer, nombre d'éléments à lire (1 unsigned short), fichier source
@@ -32,10 +39,16 @@ int main(int argc, char *argv[])
 
     printf("PE valide : 0x%X\n", magic_number);
 
-    fclose(fichier);
+#pragma endregion
+
+#pragma region "Dos header reading"
+
+    fread(&dos_header, sizeof(MY_IMAGE_DOS_HEADER), 1, fichier);
+    print_dos_header(dos_header);
 
 #pragma endregion
 
+    fclose(fichier);
     printf("Appuyez sur une touche pour continuer...");
     getchar();
     return 0;

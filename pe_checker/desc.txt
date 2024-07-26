@@ -1,2 +1,4 @@
-- A static analysis tool.
+- An analysis tool -
 Pe_checker is a simple command line tool designed to validate PE files and read their headers.
+It uses the Windows C API.
+
